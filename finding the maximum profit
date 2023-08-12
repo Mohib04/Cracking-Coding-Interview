@@ -1,0 +1,42 @@
+#include <iostream>
+
+using namespace std;
+
+int main()
+{
+    int prices[] = {1, 1, 1, 3, 1};
+    int len = sizeof(prices) / sizeof(prices[0]);
+
+    if (len == 0) {
+        cout << "No prices available." << endl;
+        return 0;
+    }
+
+    int profit = 0;
+    int buy_day = prices[0];
+    int sale_start_date = 0;
+
+    for (int i = 1; i < len; i++) {
+        if (buy_day > prices[i]) {
+            buy_day = prices[i];
+            sale_start_date = i + 1;
+        }
+    }
+
+    int sale_day = prices[sale_start_date];
+    for (int i = sale_start_date; i < len; i++) {
+        if (prices[i] > sale_day) {
+            sale_day = prices[i];
+        }
+    }
+
+    profit = sale_day - buy_day;
+
+    if (profit < 0) {
+        profit = 0;
+    }
+
+    cout << "Maximum Profit: " << profit << endl;
+
+    return 0;
+}
